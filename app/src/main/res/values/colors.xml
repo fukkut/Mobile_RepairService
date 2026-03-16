@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Основні -->
+    <color name="primary">#4A6741</color>
+    <color name="primary_dark">#354B30</color>
+    <color name="primary_light">#6B8F5E</color>
+    <color name="accent">#8BAF7C</color>
+
+    <!-- Фон -->
+    <color name="background">#F0F2EB</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="input_bg">#F7F9F5</color>
+    <color name="border">#D8DED4</color>
+
+    <!-- Текст -->
+    <color name="text_primary">#1E2A1A</color>
+    <color name="text_secondary">#6B7B68</color>
+    <color name="text_muted">#9BA89A</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Статуси ремонтів -->
+    <color name="status_new">#3B82F6</color>
+    <color name="status_new_bg">#EFF6FF</color>
+    <color name="status_in_progress">#F59E0B</color>
+    <color name="status_in_progress_bg">#FFFBEB</color>
+    <color name="status_done">#22C55E</color>
+    <color name="status_done_bg">#F0FDF4</color>
+    <color name="status_delivered">#94A3B8</color>
+    <color name="status_delivered_bg">#F8FAFC</color>
+
+    <!-- Інше -->
+    <color name="danger">#EF4444</color>
+    <color name="white">#FFFFFF</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 </resources>
