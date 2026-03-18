@@ -54,6 +54,34 @@
             android:textColor="@color/text_muted"
             android:layout_marginBottom="40dp" />
 
+        <!-- Блок помилки (прихований за замовчуванням) -->
+        <LinearLayout
+            android:id="@+id/errorBlock"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_error"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="15dp"
+            android:layout_marginBottom="14dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_warning"
+                android:contentDescription="Помилка"
+                app:tint="@color/danger" />
+
+            <TextView
+                android:id="@+id/textError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Невірний логін або пароль"
+                android:textSize="12sp"
+                android:textColor="@color/danger"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
         <!-- Лейбл Логін -->
         <TextView
             android:layout_width="match_parent"
