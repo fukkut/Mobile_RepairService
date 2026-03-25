@@ -38,4 +38,16 @@ object RepairRepository {
 
     // Ремонти конкретного клієнта
     fun getRepairsByClientId(clientId: Int): List<RepairOrder> = repairs.filter { it.clientId == clientId }
+
+    fun addRepair(repair: RepairOrder): RepairOrder {
+        val newRepair = repair.copy(id = nextRepairId++)
+        repairs.add(newRepair)
+        return newRepair
+    }
+
+    fun addClient(client: Client): Client {
+        val newClient = client.copy(id = nextClientId++)
+        clients.add(newClient)
+        return newClient
+    }
 }
