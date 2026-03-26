@@ -43,8 +43,9 @@ class RepairsFragment : Fragment() {
 
         // Налаштування RecyclerView
         adapter = RepairAdapter(RepairRepository.getAllRepairs()) { repair ->
-            Toast.makeText(requireContext(), "Ремонт: ${repair.deviceName}", Toast.LENGTH_SHORT).show()
-            // TODO: перехід на деталі ремонту
+            val intent = Intent(requireContext(), RepairDetailActivity::class.java)
+            intent.putExtra("repair_id", repair.id)
+            startActivity(intent)
         }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
