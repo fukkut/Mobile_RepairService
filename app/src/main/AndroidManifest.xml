@@ -27,6 +27,14 @@
         <activity
             android:name=".ui.repairs.NewRepairActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ui.repairs.RepairDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.repairs.ClientDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
