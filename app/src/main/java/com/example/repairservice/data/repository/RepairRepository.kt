@@ -54,4 +54,9 @@ object RepairRepository {
     fun updateRepairStatus(repairId: Int, newStatus: RepairStatus) {
         repairs.find { it.id == repairId }?.status = newStatus
     }
+
+    fun searchClients(query: String): List<Client> = clients.filter {
+        it.name.contains(query, ignoreCase = true) ||
+                it.phone.contains(query)
+    }
 }
