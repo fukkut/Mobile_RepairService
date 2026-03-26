@@ -50,4 +50,8 @@ object RepairRepository {
         clients.add(newClient)
         return newClient
     }
+
+    fun updateRepairStatus(repairId: Int, newStatus: RepairStatus) {
+        repairs.find { it.id == repairId }?.status = newStatus
+    }
 }
