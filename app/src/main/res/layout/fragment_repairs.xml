@@ -19,40 +19,59 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Пошук -->
+    <!-- Пошук + Сортування -->
     <LinearLayout
-        android:id="@+id/searchBar"
+        android:id="@+id/searchRow"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/bg_input"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="13dp"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/textTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:src="@drawable/ic_search"
-            app:tint="@color/text_muted"
-            android:contentDescription="Пошук" />
-
-        <EditText
-            android:id="@+id/editSearch"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:autofillHints=""
-            android:background="@null"
-            android:hint="Пошук за пристроєм чи клієнтом..."
-            android:inputType="text"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_muted"
-            android:textSize="12sp" />
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_input"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="13dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_search"
+                app:tint="@color/text_muted"
+                android:contentDescription="Пошук" />
+
+            <EditText
+                android:id="@+id/editSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:autofillHints=""
+                android:background="@null"
+                android:hint="Пошук за пристроєм чи клієнтом..."
+                android:inputType="text"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnSort"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_input"
+            android:gravity="center"
+            android:text="⇅"
+            android:textSize="18sp"
+            android:textColor="@color/text_muted" />
     </LinearLayout>
 
     <!-- Фільтри -->
@@ -64,7 +83,7 @@
         android:scrollbars="none"
         android:paddingHorizontal="18dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        app:layout_constraintTop_toBottomOf="@id/searchRow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
