@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +25,15 @@ class RepairsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var currentFilter: RepairStatus? = null
     private var searchQuery: String = ""
+    private var currentSort: SortType = SortType.DATE_NEW
+
+    enum class SortType(val label: String) {
+        DATE_NEW("Датою (нові)"),
+        DATE_OLD("Датою (старі)"),
+        PRICE_HIGH("Ціною (дорогі)"),
+        PRICE_LOW("Ціною (дешеві)"),
+        NAME_AZ("Назвою (А-Я)")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +49,9 @@ class RepairsFragment : Fragment() {
         val editSearch = view.findViewById<EditText>(R.id.editSearch)
         val filtersContainer = view.findViewById<LinearLayout>(R.id.filtersContainer)
         val fabNewRepair = view.findViewById<TextView>(R.id.fabNewRepair)
+        val btnSort = view.findViewById<TextView>(R.id.btnSort)
 
-        // Налаштування RecyclerView
+        // RecyclerView
         adapter = RepairAdapter(RepairRepository.getAllRepairs()) { repair ->
             val intent = Intent(requireContext(), RepairDetailActivity::class.java)
             intent.putExtra("repair_id", repair.id)
@@ -63,17 +73,32 @@ class RepairsFragment : Fragment() {
             }
         })
 
+        // Сортування
+        btnSort.setOnClickListener { showSortMenu(it) }
+
         // FAB
         fabNewRepair.setOnClickListener {
             val intent = Intent(requireContext(), NewRepairActivity::class.java)
             startActivity(intent)
         }
-
     }
 
     override fun onResume() {
         super.onResume()
         applyFilters()
+    }
+
+    private fun showSortMenu(anchor: View) {
+        val popup = PopupMenu(requireContext(), anchor)
+        for ((index, sort) in SortType.values().withIndex()) {
+            popup.menu.add(0, index, index, sort.label)
+        }
+        popup.setOnMenuItemClickListener { item ->
+            currentSort = SortType.values()[item.itemId]
+            applyFilters()
+            true
+        }
+        popup.show()
     }
 
     private fun setupFilters(container: LinearLayout) {
@@ -108,7 +133,6 @@ class RepairsFragment : Fragment() {
                 setOnClickListener {
                     currentFilter = status
                     applyFilters()
-                    // Оновити вигляд фільтрів
                     container.removeAllViews()
                     setupFilters(container)
                 }
@@ -132,6 +156,15 @@ class RepairsFragment : Fragment() {
                 it.deviceName.contains(searchQuery, ignoreCase = true) ||
                         client(it.clientId).contains(searchQuery, ignoreCase = true)
             }
+        }
+
+        // Сортування
+        repairs = when (currentSort) {
+            SortType.DATE_NEW -> repairs.sortedByDescending { it.createdDate }
+            SortType.DATE_OLD -> repairs.sortedBy { it.createdDate }
+            SortType.PRICE_HIGH -> repairs.sortedByDescending { it.price }
+            SortType.PRICE_LOW -> repairs.sortedBy { it.price }
+            SortType.NAME_AZ -> repairs.sortedBy { it.deviceName.lowercase() }
         }
 
         adapter.updateList(repairs)
