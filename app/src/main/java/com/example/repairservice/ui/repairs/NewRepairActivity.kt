@@ -16,6 +16,7 @@ import com.example.repairservice.data.repository.RepairRepository
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.view.View
 
 class NewRepairActivity : AppCompatActivity() {
 
@@ -24,6 +25,14 @@ class NewRepairActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_repair)
+
+        // Відступ для статус бару
+        val rootView = findViewById<View>(android.R.id.content)
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+            val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, systemBars.top, 0, 0)
+            insets
+        }
 
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         val editDeviceName = findViewById<EditText>(R.id.editDeviceName)

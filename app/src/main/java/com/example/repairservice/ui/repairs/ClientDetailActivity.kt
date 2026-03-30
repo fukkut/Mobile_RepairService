@@ -10,12 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.repairservice.R
 import com.example.repairservice.adapter.RepairAdapter
 import com.example.repairservice.data.repository.RepairRepository
+import android.view.View
 
 class ClientDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_detail)
+
+        // Відступ для статус бару
+        val rootView = findViewById<View>(android.R.id.content)
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+            val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, systemBars.top, 0, 0)
+            insets
+        }
 
         val clientId = intent.getIntExtra("client_id", -1)
         val client = RepairRepository.getClientById(clientId) ?: return
