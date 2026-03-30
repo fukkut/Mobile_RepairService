@@ -13,6 +13,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Відступ для статус бару
+        val rootView = findViewById<View>(android.R.id.content)
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+            val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, systemBars.top, 0, 0)
+            insets
+        }
+
         val editLogin = findViewById<android.widget.EditText>(R.id.editLogin)
         val editPassword = findViewById<android.widget.EditText>(R.id.editPassword)
         val btnLogin = findViewById<android.widget.TextView>(R.id.btnLogin)

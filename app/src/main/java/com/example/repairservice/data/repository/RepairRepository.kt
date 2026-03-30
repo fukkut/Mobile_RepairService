@@ -59,4 +59,9 @@ object RepairRepository {
         it.name.contains(query, ignoreCase = true) ||
                 it.phone.contains(query)
     }
+
+    fun updateRepair(repairId: Int, updated: RepairOrder) {
+        val index = repairs.indexOfFirst { it.id == repairId }
+        if (index != -1) repairs[index] = updated
+    }
 }

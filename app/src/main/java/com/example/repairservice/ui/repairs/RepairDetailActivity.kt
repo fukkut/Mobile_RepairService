@@ -21,6 +21,14 @@ class RepairDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repair_detail)
 
+        // Відступ для статус бару
+        val rootView = findViewById<View>(android.R.id.content)
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+            val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, systemBars.top, 0, 0)
+            insets
+        }
+
         repairId = intent.getIntExtra("repair_id", -1)
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener { finish() }
